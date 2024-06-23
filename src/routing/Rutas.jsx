@@ -16,12 +16,12 @@ export const Rutas = () => {
     return (
         <BrowserRouter>
             {/*LAYOUT */}
-            <Header />
-            <Nav />
-
-
+            <div className="header-nav">
+                <Header />
+                <Nav />
+            </div>
             {/*Contenido Central y Rutas */}
-            <section id="content" classNameName="content">
+            <section id="content" className="content">
                 <Routes>
                     <Route path="/" element={<Inicio />} />
                     <Route path="/inicio" element={<Inicio />} />
@@ -31,6 +31,8 @@ export const Rutas = () => {
 
 
             </section>
+
+
             <SideBar />
             <Footer />
 

@@ -1,13 +1,14 @@
 import React from 'react'
+import { NavLink } from 'react-router-dom'
 
 export const Header = () => {
     return (
-        <header className="header">
-            <div className="logo">
-                <div className="play"></div>
-            </div>
+        <header className="header" >
+            <NavLink to="/inicio">
+                <h1 className='T1'>Travel</h1>
+            </NavLink>
+            <h3 className='T2'>✈</h3>
 
-            <h1>MiBlog</h1>
         </header>
     )
 }
