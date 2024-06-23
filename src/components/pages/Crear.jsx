@@ -12,37 +12,45 @@ export const Crear = () => {
         e.preventDefault();
 
         try {
-            // Enviar datos del formulario al backend
-            const { datos, cargando } = await Peticion(Global.url + "crear", "POST", formulario);
+            let nuevoArticulo = formulario;
+            const { datos, cargando, error } = await Peticion(Global.url + "crear", "POST", nuevoArticulo);
 
-            // Verificar si la respuesta contiene datos antes de intentar parsear
+            if (error) {
+                setErrorMensaje("Error al guardar el artículo: " + error);
+                return;
+            }
+
             if (datos) {
-                try {
-                    // Acceder directamente a datos.articulo
-                    const articulo = datos.articulo;
-                    if (articulo && articulo._id) { // Verificar que haya un ID válido, por ejemplo
-                        setResultado(true);
+                const articulo = datos.articulo;
+                if (articulo && articulo._id) {
+                    setResultado(true);
 
-                        //subir la imagen
-                        
+                    const fileInput = document.querySelector("#file");
+
+                    if (fileInput.files.length > 0) {
+                        const formData = new FormData();
+                        formData.append('file0', fileInput.files[0]);
+
+                        const subida = await Peticion(Global.url + "subir-imagen/" + articulo._id, "POST", formData, true);
+
+                        if (subida.error) {
+                            setErrorMensaje("Error al subir la imagen: " + subida.error);
+                        } else {
+                            console.log("Imagen subida correctamente:", subida.datos);
+                        }
                     } else {
-                        console.error("Error al guardar el artículo:", datos);
-                        setErrorMensaje("Error al guardar el artículo: " + JSON.stringify(datos));
+                        console.log("No se seleccionó ninguna imagen para subir.");
                     }
-                } catch (parseError) {
-                    console.error("Error al parsear la respuesta JSON:", parseError);
-                    setErrorMensaje("Error al parsear la respuesta JSON");
+                } else {
+                    setErrorMensaje("Error al guardar el artículo: " + JSON.stringify(datos));
                 }
             } else {
-                console.error("La respuesta del servidor está vacía.");
                 setErrorMensaje("La respuesta del servidor está vacía");
             }
         } catch (error) {
-            console.error('Error al procesar la solicitud:', error);
             setErrorMensaje("Error al procesar la solicitud: " + error.message);
         }
     }
-
 
     return (
         <div className="jumbo">

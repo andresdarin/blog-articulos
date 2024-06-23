@@ -1,4 +1,5 @@
 import React from 'react'
+import { Global } from '../../helpers/Global';
 
 export const Listado = ({ articulos, setArticulos }) => {
     return (
@@ -6,7 +7,9 @@ export const Listado = ({ articulos, setArticulos }) => {
             return (
                 <article key={articulo._id} className="articulo-item">
                     <div className='mask'>
-                        <img src='https://aventurateaviajar.com/library/mod_noticias/images/viajes-por-el-mundo.jpg' />
+                        {articulo.imagen != "default.png" && <img src={Global.url + "imagen/" + articulo.imagen} />}
+                        {articulo.imagen == "default.png" && <img src='https://react.semantic-ui.com/images/wireframe/image.png' />}
+
                     </div>
                     <div className='datos'>
                         <h3 className="title">{articulo.titulo}</h3>

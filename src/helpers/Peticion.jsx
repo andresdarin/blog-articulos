@@ -1,27 +1,39 @@
-// Definición de la función Peticion que realiza una solicitud HTTP a la URL proporcionada
-export const Peticion = async (url, metodo, datosGuardar = null) => {
-    // Configuración inicial de las opciones de la solicitud
+export const Peticion = async (url, metodo, datosGuardar = null, archivos = false) => {
     let opciones = {
-        method: metodo, // Método HTTP (GET, POST, PUT, DELETE)
-        headers: {
-            "Content-Type": "application/json" // Establece el tipo de contenido a JSON
-        }
+        method: metodo,
     };
 
-    // Si el método es POST o PUT, agrega el cuerpo de la solicitud
-    if (metodo === 'POST' || metodo === 'PUT') {
-        opciones.body = JSON.stringify(datosGuardar); // Convierte los datos a una cadena JSON y los agrega al cuerpo
+    if ((metodo === 'POST' || metodo === 'PUT') && datosGuardar) {
+        if (archivos) {
+            opciones.body = datosGuardar; // Aquí, datosGuardar es una instancia de FormData
+        } else {
+            opciones.headers = {
+                "Content-Type": "application/json"
+            };
+            opciones.body = JSON.stringify(datosGuardar);
+        }
     }
 
-    // Realiza la solicitud fetch con la URL y las opciones configuradas
-    const peticion = await fetch(url, opciones);
+    try {
+        const peticion = await fetch(url, opciones);
 
-    // Espera la respuesta y la convierte a formato JSON
-    const datos = await peticion.json();
+        // Verifica que la respuesta sea JSON antes de parsearla
+        const contentType = peticion.headers.get("content-type");
+        if (!contentType || !contentType.includes("application/json")) {
+            throw new Error("La respuesta no es un JSON válido");
+        }
 
-    // Retorna un objeto con los datos obtenidos y el estado de carga
-    return {
-        datos, // Datos obtenidos de la respuesta
-        cargando: false // Indica que la carga ha terminado
-    };
+        const datos = await peticion.json();
+        return {
+            datos,
+            cargando: false
+        };
+    } catch (error) {
+        console.error('Error en la solicitud:', error);
+        return {
+            datos: null,
+            cargando: false,
+            error: error.message
+        };
+    }
 }
