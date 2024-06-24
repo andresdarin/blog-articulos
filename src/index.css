@@ -30,7 +30,7 @@ body {
     "footer footer footer"
   ;
   grid-template-rows: 70px auto auto 70px;
-  grid-template-columns: auto auto 400px;
+  grid-template-columns: auto auto 405px;
 }
 
 /*ESTILOS CABECERA*/
@@ -233,10 +233,21 @@ nav>ul li:nth-child(4).active~.indicator {
   text-align: left;
   display: flex;
   max-height: 225px;
+  overflow: hidden;
 }
 
 .articulo-item h3 {
   font-size: 30px;
+}
+
+.articulo-item h3 a {
+  font-size: 30px;
+  text-decoration: none;
+  color: var(--color5);
+}
+
+.articulo-item h3 a:hover {
+  color: var(--color4);
 }
 
 .articulo-item button {
@@ -254,7 +265,16 @@ nav>ul li:nth-child(4).active~.indicator {
 
 }
 
+.single_article {
+  display: flex;
+  align-items: flex-start;
+}
+
 .jumbo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   background: var(--color1);
   border-radius: 10px;
   box-shadow: 0px 0px 6px var(--color1);
@@ -264,14 +284,95 @@ nav>ul li:nth-child(4).active~.indicator {
   padding-bottom: 75px;
 }
 
-.jumbo h1 {
-  font-size: 30px;
+.jumbo_article {
+  display: flex;
+  justify-content: space-between;
+  background: var(--color1);
+  border-radius: 10px;
+  box-shadow: 0px 0px 6px var(--color1);
+  margin: 25px;
+  width: 90%;
+  padding: 25px;
+  padding-bottom: 60px;
+
+}
+
+.jumbo_article h1 {
+  font-size: 45px;
   color: var(--color5);
+  font-weight: 800;
+  margin: 0;
+}
+
+.jumbo_article span {
+  font-size: 10px;
+  color: var(--color5);
+  margin: 0;
+  margin-left: auto;
+  margin-top: auto;
+}
+
+.jumbo_article p {
+  font-size: 25px;
+  justify-content: center;
+  color: var(--color5);
+  margin: 0;
+  padding: 25px;
+  line-height: 1.3;
+  text-align: justify;
+  font-weight: 200;
+}
+
+.article_text {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  width: 70%;
+}
+
+.jumbo_article .mask {
+  position: relative;
+  width: 30%;
+  padding: 20px;
+  padding-bottom: 0;
+  background-color: white;
+  overflow: hidden;
+  border: thin solid var(--color4);
+  z-index: 4;
+  border-radius: 10px;
+  margin-left: 25px;
+}
+
+.jumbo_article .mask img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border: thin solid var(--color4);
+  z-index: 4;
+}
+
+.polaroid_name {
+  font-family: "Great Vibes", cursive;
+  font-weight: 100;
+  margin-top: 30px;
+  font-size: 40px;
+  margin: 5;
+  margin-bottom: auto;
 }
 
 .jumbo p {
   display: block;
   margin-bottom: 40px;
+}
+
+.datos {
+  width: 60%;
+  padding-top: 0;
+  text-align: justify;
+}
+
+.datos a {
+  padding-top: 0;
 }
 
 .button,
@@ -369,15 +470,21 @@ textarea {
   margin-top: 10px;
 }
 
+#search_field::placeholder {
+  font-family: "Playwrite NG Modern", cursive, Arial, Helvetica;
+  color: #999;
+}
+
 /*ESTILOS PARA EL PIE DE PÁGINA*/
 .footer {
   grid-area: footer;
+  position: relative;
+  margin-top: auto;
 
   background: var(--color2);
   color: var(--color5);
-  border-top: 1px solid var(--color1);
   text-align: left;
-  line-height: 68px;
+  line-height: 47px;
   padding-left: 25px;
   max-height: 50px;
 }
