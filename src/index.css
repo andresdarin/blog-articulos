@@ -30,7 +30,7 @@ body {
     "footer footer footer"
   ;
   grid-template-rows: 70px auto auto 70px;
-  grid-template-columns: auto auto 405px;
+  grid-template-columns: auto auto 23%;
 }
 
 /*ESTILOS CABECERA*/
@@ -260,6 +260,11 @@ nav>ul li:nth-child(4).active~.indicator {
   margin-right: 40px;
 }
 
+.form-group .mask {
+  width: 150px;
+  margin: 5px;
+}
+
 .articulo-item .mask img {
   width: 100%;
 
@@ -376,6 +381,7 @@ nav>ul li:nth-child(4).active~.indicator {
 }
 
 .button,
+.file-upload-label,
 button,
 input[type="submit"],
 input[type="button"] {
@@ -386,9 +392,10 @@ input[type="button"] {
   color: var(--color1);
   border: 0;
   outline: 0;
-  padding: 15px;
+  padding: 8px;
   border-radius: 3px;
   margin-top: 15px;
+  margin-right: 15px;
   text-transform: capitalize;
   font-size: 16px;
   font-weight: 500;
@@ -396,14 +403,17 @@ input[type="button"] {
   transition: all 300ms;
 }
 
+.file-upload-label:hover {
+  color: var(--color4);
+}
+
+
 .articulo-item .edit:hover {
-  background: var(--colorEditar);
-  color: var(--color5);
+  color: var(--colorEditar);
 }
 
 .articulo-item .delete:hover {
-  background: var(--colorEliminar);
-  color: var(--color5);
+  color: var(--colorEliminar);
 }
 
 /*ESTILOS BARRA LATERAL*/
@@ -446,13 +456,25 @@ textarea {
 
 .form-group input[type="text"],
 .form-group input[type="file"],
-.form-group textarea {
+.form-group textarea,
+.formulario {
   border: 1px solid var(--color1);
+  resize: none;
   outline: 0;
   width: 100%;
   margin-top: 0;
   margin-bottom: 15px;
   font-family: "Playwrite NG Modern", cursive, Arial, Helvetica;
+}
+
+.form-group input[type="text"],
+.form-group textarea {
+  background-color: var(--color1);
+}
+
+.form-group input[type="text"]:focus,
+.form-group textarea:focus {
+  background-color: white;
 }
 
 .form-group input[type="file"] {
@@ -464,6 +486,10 @@ textarea {
   margin: 0 auto;
 }
 
+/* Ocultar el input de tipo file real */
+.file-upload-input {
+  display: none;
+}
 
 .edit_form {
   border-top: 1px solid var(--color1);

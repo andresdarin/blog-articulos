@@ -46,6 +46,7 @@ export const useForm = (objetoInicial = {}) => {
     return {
         formulario,
         enviado,
-        cambiado
+        cambiado,
+        setFormulario
     }
 }

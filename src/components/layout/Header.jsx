@@ -8,7 +8,6 @@ export const Header = () => {
                 <h1 className='T1'>Travel</h1>
             </NavLink>
             <h3 className='T2'>✈</h3>
-
         </header>
     )
 }
